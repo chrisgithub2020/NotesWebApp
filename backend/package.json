@@ -1,0 +1,28 @@
+{
+  "name": "notesapp",
+  "version": "1.0.0",
+  "description": "A notes aap that uses graphql",
+  "license": "ISC",
+  "author": "Christ Agyemang",
+  "type": "commonjs",
+  "main": "index.ts",
+  "scripts": {
+    "start": "node ./src/index.ts",
+    "dev": "nodemon ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "graphql-codegen"
+  },
+  "dependencies": {
+    "@apollo/server": "^5.0.0",
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/typescript-resolvers": "^4.5.1",
+    "apollo-datasource-mongodb": "^0.6.0",
+    "graphql-tag": "^2.12.6",
+    "mongodb": "^6.18.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}

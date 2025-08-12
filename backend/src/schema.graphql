@@ -1,0 +1,99 @@
+type User {
+    id: ID!
+    "user name"
+    name: String!
+    "email"
+    email: String!
+    "password"
+    password: String!
+}
+
+type Note {
+    id: ID!
+    "title"
+    title: String!
+    "notes ankasa"
+    note: String!
+    "who made this note"
+    author: ID!
+}
+
+
+input CreateUserInput {
+    id: ID!
+    "what is the name of the user"
+    name: String!
+    "email of the user"
+    email: String!
+    "security"
+    password: String!
+}
+
+input CreateNoteInput {
+    id: ID!
+    "what is the title"
+    title: String!
+    "the text in the note"
+    note: String!
+    "who made this"
+    author: ID!
+
+}
+
+input UpdateNoteInput {
+    id: ID!
+    "title of the note"
+    title: String!
+    "note "
+    note: String!
+    "who made this note"
+    author: ID!
+}
+
+type CreateUserResponse {
+    code: Int!
+    "was the mutation successful"
+    success: Boolean!
+    "What message do we have for client in case of error"
+    message: String!
+    "what was the applied changes"
+    user: User
+}
+
+
+type CreateNoteResponse {
+    code: Int!
+    "was the mutation successful"
+    success: Boolean!
+    "What message do we have for client in case of error"
+    message: String!
+    "what was the applied changes"
+    note: [Note]
+}
+
+type UpdateNoteResponse {
+    code: Int!
+    "was the mutation successful"
+    success: Boolean!
+    "What message do we have for client in case of error"
+    message: String!
+}
+
+input GetUserInput {
+    "email of the user"
+    email: String!
+    "password of the user"
+    password: String!
+}
+
+
+type Query {
+    getUser(input: GetUserInput!): User
+    getNote(id: ID!): [Note]!
+}
+
+type Mutation {
+    createUser(input: CreateUserInput!): CreateUserResponse!
+    createNote(input: CreateNoteInput!): CreateNoteResponse!
+    updateNote(input: UpdateNoteInput!): UpdateNoteResponse!
+}
