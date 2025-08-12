@@ -16,17 +16,16 @@ export default function LogInPage() {
       alert("Fill the form");
       return;
     }
-
     const response = await axios.post(GRAPHQL_URL, {
       query: LogInQuery,
       variables: {
         input: {
           email: email,
-          password: md5(password?.toString()!),
+          password: md5(password.trimStart().toString()!),
         },
       },
     });
-
+    console.log(response.data.data)
     if (!response.data.data.getUser) {
         alert("Incorrect Details")
     } else {

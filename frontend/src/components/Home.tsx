@@ -7,15 +7,16 @@ import { GetNotesQuery, GRAPHQL_URL} from "../utils/queries";
 import { useNavigate } from "react-router";
 
 export default function Home() {
-  const { userDetail } = UseContext();
+  const { userDetail, notes } = UseContext();
   const navigate = useNavigate()
-  const [notes, setNote] = useState<NoteType[]>();
+  const [noteList, setNote] = useState<NoteType[]>();
 
   const fetchNotes = async () => {
     const response = await axios.post(GRAPHQL_URL, {
       query: GetNotesQuery,
       variables: { getNoteId: userDetail.current.id },
     });
+    notes.current = response.data.data.getNote
     setNote(response.data.data.getNote);
   };
   const dummy = () => {
@@ -40,7 +41,7 @@ export default function Home() {
         </button>
       </div>
       <div className="p-3" style={{ height: "90vh", backgroundColor: "grey" }}>
-        {notes?.map((val: NoteType) => {
+        {noteList?.map((val: NoteType) => {
           return <Note id={val.id} key={val.id} title={val.title} />;
         })}
       </div>

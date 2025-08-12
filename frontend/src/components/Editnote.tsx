@@ -34,7 +34,7 @@ export default function EditNote() {
             }}})
             if (response.data.data.createNote.success){
               alert("Note was saved")
-              navigate("./")
+              navigate("/")
             } else {
               alert("There was a problem try again")
             }
@@ -47,7 +47,7 @@ export default function EditNote() {
             }}})
             if (response.data.data.updateNote.success){
               alert("Note was Updated")
-              navigate("./")
+              navigate("/")
             } else {
               alert("There was a problem try again")
             }

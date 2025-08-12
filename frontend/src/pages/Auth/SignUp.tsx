@@ -16,13 +16,14 @@ export default function SignUpPage() {
     if (!name || !email || !password) {
         return
     }
+    password.trimStart()
     const response = await axios.post(GRAPHQL_URL, {
       query: SignUpQuery,
       variables: {
         input: {
           name: name,
           email: email,
-          password: md5(password?.toString()!),
+          password: md5(password.trimStart().toString()!),
           id: crypto.randomUUID().toString(),
         },
       },
