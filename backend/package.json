@@ -17,6 +17,7 @@
     "@graphql-codegen/cli": "^5.0.7",
     "@graphql-codegen/typescript-resolvers": "^4.5.1",
     "apollo-datasource-mongodb": "^0.6.0",
+    "dotenv": "^17.2.1",
     "graphql-tag": "^2.12.6",
     "mongodb": "^6.18.0"
   },

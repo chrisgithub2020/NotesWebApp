@@ -2,6 +2,7 @@ import {ApolloServer} from "@apollo/server"
 import {startStandaloneServer} from "@apollo/server/standalone"
 import {gql} from "graphql-tag"
 import {MongoClient} from "mongodb"
+import "dotenv/config"
 
 import {readFileSync} from "fs"
 import path from "path"
@@ -9,11 +10,13 @@ import path from "path"
 import {resolvers} from "./resolvers"
 import MongoApi from "./dataSource/database"
 
+const uri = process.env.MONGO_URI
 const typeDefinitions = gql (
     readFileSync(path.resolve(__dirname, "./schema.graphql"), {encoding: "utf-8"})
 )
 
-const client = new MongoClient('mongodb://127.0.0.1:27017/NotesApp')
+// const client = new MongoClient('mongodb://127.0.0.1:27017/NotesApp')
+const client = new MongoClient(uri)
 
 
 async function startServer() {
