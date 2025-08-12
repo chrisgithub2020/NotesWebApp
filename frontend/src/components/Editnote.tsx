@@ -1,16 +1,27 @@
 import axios from "axios"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {AddNoteQuery, UpdateNotesQuery, GRAPHQL_URL} from "../utils/queries"
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import type { Note } from "../utils/Context";
 import { UseContext } from "../utils/Context";
 
 export default function EditNote() {
     const [title, setTitle] = useState<string>()
     const [note, setNote] = useState<string>()
+    const [defaultNote, setDefaultNote] = useState<Note>()
 
-    const {userDetail} = UseContext()
+    const navigate = useNavigate()
+    const {userDetail, notes} = UseContext()
 
-    const {id} = useParams()         
+    const {id} = useParams()   
+    
+    useEffect(()=>{
+      notes.current.forEach((val)=>{
+        if (val.id===id){
+          setDefaultNote(val)
+        }
+      })
+    })
 
 
     const saveNote = async()=>{
@@ -23,6 +34,7 @@ export default function EditNote() {
             }}})
             if (response.data.data.createNote.success){
               alert("Note was saved")
+              navigate("./")
             } else {
               alert("There was a problem try again")
             }
@@ -35,6 +47,7 @@ export default function EditNote() {
             }}})
             if (response.data.data.updateNote.success){
               alert("Note was Updated")
+              navigate("./")
             } else {
               alert("There was a problem try again")
             }
@@ -47,6 +60,7 @@ export default function EditNote() {
       <div className="user-details mx-1">
         <div className="input-group mb-3">
           <input
+          defaultValue={defaultNote?.title ? defaultNote.title: ""}
             type="text"
             className="form-control mx-1"
             placeholder="Title"
@@ -69,6 +83,7 @@ export default function EditNote() {
         <textarea onChange={(event)=>{
             setNote(event.target.value)
         }}
+        defaultValue={defaultNote?.note ? defaultNote.note: ""}
           style={{ height: "100%", width: "100%" , backgroundColor: "white", color: "black"}}
           placeholder="Your notes"
         />
