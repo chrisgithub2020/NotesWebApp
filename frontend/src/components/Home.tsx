@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { UseContext } from "../utils/Context";
 import Note from "./Note";
 import type { Note as NoteType } from "../utils/Context";
-import { GetNotesQuery } from "../utils/queries";
+import { GetNotesQuery, GRAPHQL_URL} from "../utils/queries";
 import { useNavigate } from "react-router";
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
   const [notes, setNote] = useState<NoteType[]>();
 
   const fetchNotes = async () => {
-    const response = await axios.post("http://localhost:4000/graphql", {
+    const response = await axios.post(GRAPHQL_URL, {
       query: GetNotesQuery,
       variables: { getNoteId: userDetail.current.id },
     });

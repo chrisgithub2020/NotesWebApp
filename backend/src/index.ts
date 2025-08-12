@@ -17,8 +17,8 @@ const typeDefinitions = gql (
 
 // const client = new MongoClient('mongodb://127.0.0.1:27017/NotesApp')
 const client = new MongoClient(uri)
-const PORT = parseInt(process.env.PORT || '4000', 10)
-console.log(uri)
+const PORT = (process.env.PORT || '4000', 10)
+
 async function startServer() {
     await client.connect()
     const server = new ApolloServer({typeDefs: typeDefinitions, resolvers: resolvers})

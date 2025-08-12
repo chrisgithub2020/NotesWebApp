@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { SignUpQuery } from "../../utils/queries";
+import { SignUpQuery,GRAPHQL_URL } from "../../utils/queries";
 import axios from "axios";
 import md5 from "md5";
 import { UseContext } from "../../utils/Context";
@@ -16,7 +16,7 @@ export default function SignUpPage() {
     if (!name || !email || !password) {
         return
     }
-    const response = await axios.post("http://localhost:4000/graphql", {
+    const response = await axios.post(GRAPHQL_URL, {
       query: SignUpQuery,
       variables: {
         input: {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { LogInQuery } from "../../utils/queries";
+import { LogInQuery ,GRAPHQL_URL} from "../../utils/queries";
 import md5 from "md5";
 import axios from "axios";
 import { UseContext } from "../../utils/Context";
@@ -17,7 +17,7 @@ export default function LogInPage() {
       return;
     }
 
-    const response = await axios.post("http://localhost:4000/graphql", {
+    const response = await axios.post(GRAPHQL_URL, {
       query: LogInQuery,
       variables: {
         input: {

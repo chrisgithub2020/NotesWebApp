@@ -1,30 +1,43 @@
 import axios from "axios"
 import { useState } from "react";
-import {AddNoteQuery} from "../utils/queries"
-import { useParams, useSearchParams } from "react-router";
+import {AddNoteQuery, UpdateNotesQuery, GRAPHQL_URL} from "../utils/queries"
+import { useParams } from "react-router";
+import { UseContext } from "../utils/Context";
 
 export default function EditNote() {
     const [title, setTitle] = useState<string>()
     const [note, setNote] = useState<string>()
+
+    const {userDetail} = UseContext()
 
     const {id} = useParams()         
 
 
     const saveNote = async()=>{
         if (id === undefined) {
-            const response = await axios.post("http://localhost:4000/graphql", {query: AddNoteQuery, variables: {input:{
+            const response = await axios.post(GRAPHQL_URL, {query: AddNoteQuery, variables: {input:{
                 id: crypto.randomUUID().toString(),
                 note: note, 
                 title: title, 
-                author: "look"
+                author: userDetail.current.id
             }}})
+            if (response.data.data.createNote.success){
+              alert("Note was saved")
+            } else {
+              alert("There was a problem try again")
+            }
         } else {
-            const response = await axios.post("http://localhost:4000/graphql", {query: AddNoteQuery, variables: {input:{
+            const response = await axios.post(GRAPHQL_URL, {query: UpdateNotesQuery, variables: {input:{
                 id: id,
                 note: note, 
                 title: title, 
-                author: "look"
+                author: userDetail.current.id
             }}})
+            if (response.data.data.updateNote.success){
+              alert("Note was Updated")
+            } else {
+              alert("There was a problem try again")
+            }
         }
     }
 
