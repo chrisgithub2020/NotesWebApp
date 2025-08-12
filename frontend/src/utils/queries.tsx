@@ -1,5 +1,5 @@
-// export const GRAPHQL_URL = "https://graphql-notes-vxj3.onrender.com/graphql"
-export const GRAPHQL_URL = "http://localhost:10/graphql"
+export const GRAPHQL_URL = "https://graphql-notes-vxj3.onrender.com/graphql"
+// export const GRAPHQL_URL = "http://localhost:10/graphql"
 
 export const AddNoteQuery = `mutation CreateNote ($input: CreateNoteInput!) {
   createNote(input: $input) {

@@ -25,7 +25,6 @@ export default function LogInPage() {
         },
       },
     });
-    console.log(response.data.data)
     if (!response.data.data.getUser) {
         alert("Incorrect Details")
     } else {
