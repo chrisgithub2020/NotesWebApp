@@ -20,6 +20,7 @@ export const GetNotesQuery = `query GetNote($getNoteId: ID!) {
   getNote(id: $getNoteId) {
     id
     title
+    note
   }
 }`
 

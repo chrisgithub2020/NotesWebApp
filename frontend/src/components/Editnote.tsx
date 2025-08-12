@@ -18,10 +18,12 @@ export default function EditNote() {
     useEffect(()=>{
       notes.current.forEach((val)=>{
         if (val.id===id){
+          setTitle(val.title)
+          setNote(val.note)
           setDefaultNote(val)
         }
       })
-    })
+    },[])
 
 
     const saveNote = async()=>{
@@ -39,6 +41,12 @@ export default function EditNote() {
               alert("There was a problem try again")
             }
         } else {
+          console.log({
+                id: id,
+                note: note, 
+                title: title, 
+                author: userDetail.current.id
+            })
             const response = await axios.post(GRAPHQL_URL, {query: UpdateNotesQuery, variables: {input:{
                 id: id,
                 note: note, 
