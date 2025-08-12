@@ -72,8 +72,9 @@ export const resolvers: Resolvers = {
     },
 
     Query: {
-        getUser (_, {input}, {dataSource}) {
-            const user = dataSource.usersDb.getUser(input)
+        async getUser (_, {input}, {dataSource}): Promise<User> {
+            const user = await dataSource.usersDb.getUser(input)
+            console.log(user)
             return (input.password === user.password) ? user : null
         },
 
