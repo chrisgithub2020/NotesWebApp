@@ -39,7 +39,7 @@ export default function LogInPage() {
     <div className="container">
       <div className="card mx-auto" style={{ width: "18rem" }}>
         <div className="card-body">
-          <h5 className="card-title">SignUp</h5>
+          <h5 className="card-title">LogIn</h5>
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text" id="inputGroup-sizing-default">
